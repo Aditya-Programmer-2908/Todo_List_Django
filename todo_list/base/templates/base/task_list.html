@@ -1,4 +1,8 @@
+<p>{{ request.user }}</p>
+
+<hr>
 <h1>My to do List</h1>
+
 <a href="{% url 'task-create' %}">Add Task</a>
 
 <table>
@@ -12,6 +16,7 @@
         <td>{{task.title}}</td>
         <td><a href="{% url 'task' task.id %}">View</a></td>
         <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
+        <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
 
     </tr>
     {% empty %}
