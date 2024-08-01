@@ -1,4 +1,12 @@
-<p>{{ request.user }}</p>
+{% if request.user.is_authenticated %}
+    <p>{{ request.user }}</p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
 
 <hr>
 <h1>My to do List</h1>
@@ -12,14 +20,13 @@
         <th></th>
     </tr>
     {% for task in tasks %}
-    <tr>
-        <td>{{task.title}}</td>
-        <td><a href="{% url 'task' task.id %}">View</a></td>
-        <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
-        <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
-
-    </tr>
+        <tr>
+            <td>{{ task.title }}</td>
+            <td><a href="{% url 'task' task.id %}">View</a></td>
+            <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
+            <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
+        </tr>
     {% empty %}
-    <h3>No items available</h3>
+        <h3>No items available</h3>
     {% endfor %}
 </table>
