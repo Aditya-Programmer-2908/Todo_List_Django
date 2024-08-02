@@ -48,6 +48,7 @@ class RegisterPage(FormView):
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
+    template_name='base/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
